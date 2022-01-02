@@ -4,9 +4,9 @@ metadata:
   labels:
     app: minecraft-v1
   name: minecraft-v1
-  namespace: minecraft
+  namespace: default
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: minecraft-v1
@@ -44,7 +44,7 @@ metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: minecraft-v1
   name: tcpminecraft
-  namespace: minecraft
+  namespace: default
 spec:
   ports:
   - name: tcp25565
