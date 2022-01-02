@@ -6,7 +6,7 @@ metadata:
   name: minecraft-v1
   namespace: minecraft
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: minecraft-v1
