@@ -18,7 +18,7 @@ spec:
         app: unifi-v1
     spec:
       containers:
-        - env: {}
+        - env:
           image: lscr.io/linuxserver/unifi-controller
           imagePullPolicy: Always
           name: unifi-v1
