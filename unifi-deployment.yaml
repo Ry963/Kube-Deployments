@@ -20,9 +20,9 @@ spec:
       containers:
         - env:
             - name: PUID
-              value: "103"
+              value: "0"
             - name: PGID
-              value: "104"
+              value: "0"
           image: lscr.io/linuxserver/unifi-controller
           imagePullPolicy: Always
           name: unifi-v1
