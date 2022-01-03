@@ -6,7 +6,7 @@ metadata:
   name: server7dtd2
   namespace: default
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: server7dtd2
