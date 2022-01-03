@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: server7dtd2
+  name: server7dtd2
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server7dtd2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: server7dtd2
+    spec:
+      containers:
+        - env:
+            - name: START_MODE
+              value: "3"
+            - name: VERSION
+              value: stable
+            - name: TimeZone
+              value: Europe/London
+            - name: TEST_ALERT
+              value: "NO"
+            - name: ALLOC_FIXES
+              value: "NO"
+            - name: BACKUP
+              value: "YES"
+            - name: MONITOR
+              value: "NO"
+          image: vinanrra/7dtd-server
+          imagePullPolicy: Always
+          name: server7dtd2
+          ports:
+            - containerPort: 26900
+              name: 26900tcp
+              protocol: TCP
+            - containerPort: 26900
+              name: 26900udp
+              protocol: UDP
+            - containerPort: 26901
+              name: 26901udp
+              protocol: UDP
+            - containerPort: 26902
+              name: 26902udp
+              protocol: UDP
+          volumeMounts:
+            - mountPath: /home/sdtdserver/serverfiles/
+              name: vol0
+              subPath: ServerFiles
+            - mountPath: /home/sdtdserver/.local/share/7DaysToDie/
+              name: vol0
+              subPath: 7DaysToDie
+            - mountPath: /home/sdtdserver/log/
+              name: vol0
+              subPath: log
+            - mountPath: /home/sdtdserver/lgsm/backup/
+              name: vol0
+              subPath: backups
+            - mountPath: /home/sdtdserver/lgsm/config-lgsm/sdtdserver
+              name: vol0
+              subPath: LGSM-Config
+      volumes:
+        - name: vol0
+          nfs:
+            path: /mnt/Alpha-Pool/K3s/Server_7dtd
+            server: 192.168.10.206
