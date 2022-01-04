@@ -4,7 +4,7 @@ metadata:
   labels:
     app: test-nginx
   name: test-nginx-svc
-  namespace: Testing
+  namespace: testing
 spec:
   type: LoadBalancer
   ports:

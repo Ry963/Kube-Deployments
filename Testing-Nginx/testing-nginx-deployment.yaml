@@ -4,7 +4,7 @@ metadata:
   labels:
     app: test-nginx
   name: test-nginx
-  namespace: Testing
+  namespace: testing
 spec:
   replicas: 2
   selector:
