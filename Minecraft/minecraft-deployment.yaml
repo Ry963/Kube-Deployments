@@ -28,6 +28,7 @@ spec:
             - containerPort: 25565
               name: 25565tcp
               protocol: TCP
+          resources:
           volumeMounts:
             - mountPath: /data
               name: vol0

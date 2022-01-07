@@ -49,6 +49,7 @@ spec:
             - containerPort: 26902
               name: 26902udp
               protocol: UDP
+          resources:
           volumeMounts:
             - mountPath: /home/sdtdserver/serverfiles/
               name: vol0
