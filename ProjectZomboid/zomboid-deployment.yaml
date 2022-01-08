@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: zomboid
+  name: zomboid
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zomboid
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: zomboid
+    spec:
+      containers:
+        - env:
+            - name: SERVER_NAME
+              value: "Ry963"
+            - name: ADMIN_PASSWORD
+              value: "Pen15"
+          image: afey/zomboid
+          imagePullPolicy: Always
+          name: zomboid
+          ports:
+            - containerPort: 8766
+              name: 8766udp
+              protocol: UDP
+            - containerPort: 8767
+              name: 8767udp
+              protocol: UDP
+            - containerPort: 16261
+              name: 16261udp
+              protocol: UDP
+            - containerPort: 27015
+              name: 27015tcp
+              protocol: TCP
+            - containerPort: 16262
+              name: 16262tcp
+              protocol: TCP
+            - containerPort: 16263
+              name: 16263tcp
+              protocol: TCP
+            - containerPort: 16264
+              name: 16264tcp
+              protocol: TCP
+            - containerPort: 16265
+              name: 16265tcp
+              protocol: TCP
+            - containerPort: 16266
+              name: 16266tcp
+              protocol: TCP
+            - containerPort: 16267
+              name: 16267tcp
+              protocol: TCP
+            - containerPort: 16268
+              name: 16268tcp
+              protocol: TCP
+            - containerPort: 16269
+              name: 16269tcp
+              protocol: TCP
+            - containerPort: 16270
+              name: 16270tcp
+              protocol: TCP
+            - containerPort: 16271
+              name: 16271tcp
+              protocol: TCP
+            - containerPort: 16272
+              name: 16272tcp
+              protocol: TCP
+          resources:
+          volumeMounts:
+            - mountPath: /server-data
+              name: vol0
+              subPath: ServerData
+      volumes:
+        - name: vol0
+          nfs:
+            path: /mnt/Alpha-Pool/K3s/Server_zomboid
+            server: 192.168.10.206
