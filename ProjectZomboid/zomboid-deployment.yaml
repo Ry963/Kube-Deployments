@@ -28,6 +28,10 @@ spec:
         - name: volume-permissions2
           image: busybox:1.31.1
           command: ["sh", "-c", "chown 1000:1000 server-files"]
+          volumeMounts:
+            - name: vol0
+              mountPath: /server-files
+              subPath: ServerFiles
       containers:
         - env:
             - name: SERVER_NAME
@@ -92,6 +96,9 @@ spec:
             - mountPath: /server-data
               name: vol0
               subPath: ServerData
+            - mountPath: /server-files
+              name: vol0
+              subPath: ServerFiles
       volumes:
         - name: vol0
           nfs:
