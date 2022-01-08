@@ -17,9 +17,7 @@ spec:
       labels:
         app: zomboid
     spec:
-      initContainers: 
-    # The "volume-permissions" init container is required if you run into permission issues.
-    # Related issue: https://github.com/traefik/traefik/issues/6972
+      initContainers:
         - name: volume-permissions
           image: busybox:1.31.1
           command: ["sh", "-c", "chown 1000:1000 server-data/*"]
@@ -29,9 +27,6 @@ spec:
         - name: volume-permissions2
           image: busybox:1.31.1
           command: ["sh", "-c", "chown 1000:1000 server-files/*"]
-          volumeMounts:
-            - name: ServerData
-              mountPath: /server-data
       containers:
         - env:
             - name: SERVER_NAME
