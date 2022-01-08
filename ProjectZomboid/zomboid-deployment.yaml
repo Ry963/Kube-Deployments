@@ -24,6 +24,7 @@ spec:
           volumeMounts:
             - name: ServerData
               mountPath: /server-data
+              subPath: ServerData
         - name: volume-permissions2
           image: busybox:1.31.1
           command: ["sh", "-c", "chown 1000:1000 server-files/*"]
