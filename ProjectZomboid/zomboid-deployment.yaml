@@ -23,6 +23,10 @@ spec:
               value: "Ry963"
             - name: ADMIN_PASSWORD
               value: "Pen15"
+            - name: PUID
+              value: "0"
+            - name: PGID
+              value: "0"
           image: afey/zomboid
           imagePullPolicy: Always
           name: zomboid
