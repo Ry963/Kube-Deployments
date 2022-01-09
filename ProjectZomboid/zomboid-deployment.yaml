@@ -101,6 +101,12 @@ spec:
             - mountPath: /server-files
               name: vol0
               subPath: ServerFiles
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            fsGroup: 1000
+            allowPrivilegeEscalation: false
       volumes:
         - name: vol0
           nfs:
