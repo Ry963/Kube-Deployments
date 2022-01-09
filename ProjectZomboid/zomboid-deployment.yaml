@@ -23,17 +23,13 @@ spec:
       initContainers:
         - name: volume-permissions
           image: busybox:1.31.1
-          command: ["sh", "-c", "chown -R 1000:1000 server-data"]
+          command: ["sh", "-c", "chown -R 1000:1000 server-data", "chown -R 1000:1000 /server-data/*", "chown -R 1000:1000 server-files", "chown -R 1000:1000 /server-files/*"]
           volumeMounts:
-            - name: vol0
-              mountPath: /server-data
+            - mountPath: /server-data
+              name: vol0
               subPath: ServerData
-        - name: volume-permissions2
-          image: busybox:1.31.1
-          command: ["sh", "-c", "chown -R 1000:1000 server-files"]
-          volumeMounts:
-            - name: vol0
-              mountPath: /server-files
+            - mountPath: /server-files
+              name: vol0
               subPath: ServerFiles
       containers:
         - env:
