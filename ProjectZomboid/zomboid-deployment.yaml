@@ -32,6 +32,10 @@ spec:
             - mountPath: /server-files
               name: vol0
               subPath: ServerFiles
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
       containers:
         - env:
             - name: SERVER_NAME
