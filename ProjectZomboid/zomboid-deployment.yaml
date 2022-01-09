@@ -17,10 +17,6 @@ spec:
       labels:
         app: zomboid
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 1000
       initContainers:
         - name: volume-permissions
           image: busybox:1.31.1
@@ -32,10 +28,6 @@ spec:
             - mountPath: /server-files
               name: vol0
               subPath: ServerFiles
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
       containers:
         - env:
             - name: SERVER_NAME
@@ -103,10 +95,6 @@ spec:
             - mountPath: /server-files
               name: vol0
               subPath: ServerFiles
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
       volumes:
         - name: vol0
           nfs:
