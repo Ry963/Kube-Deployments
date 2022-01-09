@@ -17,6 +17,9 @@ spec:
       labels:
         app: zomboid
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       initContainers:
         - name: volume-permissions
           image: busybox:1.31.1
