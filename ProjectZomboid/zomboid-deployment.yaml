@@ -28,9 +28,9 @@ spec:
             - mountPath: /server-data
               name: vol0
               subPath: ServerData
-#            - mountPath: /server-files
-#              name: vol0
-#              subPath: ServerFiles
+            - mountPath: /server-files
+              name: vol0
+              subPath: ServerFiles
       containers:
         - env:
             - name: SERVER_NAME
@@ -91,9 +91,9 @@ spec:
             - mountPath: /server-data
               name: vol0
               subPath: ServerData
-#            - mountPath: /server-files
-#              name: vol0
-#              subPath: ServerFiles
+            - mountPath: /server-files
+              name: vol0
+              subPath: ServerFiles
       volumes:
         - name: vol0
           nfs:
