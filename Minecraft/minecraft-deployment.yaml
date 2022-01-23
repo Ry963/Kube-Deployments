@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: minecraft-v1
-  name: minecraft-v1
+    app: minecraft
+  name: minecraft
   namespace: default
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: minecraft-v1
+      app: minecraft
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: minecraft-v1
+        app: minecraft
     spec:
       containers:
         - env: 
@@ -23,7 +23,7 @@ spec:
               value: "TRUE"
           image: itzg/minecraft-server
           imagePullPolicy: Always
-          name: minecraft-v1
+          name: minecraft
           ports:
             - containerPort: 25565
               name: 25565tcp
@@ -35,6 +35,5 @@ spec:
               subPath: Data
       volumes:
         - name: vol0
-          nfs:
-            path: /mnt/Alpha-Pool/K3s/Server_minecraft
-            server: 192.168.10.206
+          persistentVolumeClaim:
+            claimName: minecraft

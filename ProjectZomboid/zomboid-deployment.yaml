@@ -6,7 +6,7 @@ metadata:
   name: zomboid
   namespace: default
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: zomboid
@@ -20,27 +20,39 @@ spec:
       initContainers:
         - name: volume-permissions
           image: busybox:1.31.1
-          command: ["sh", "-c", "chown -R 1000:1000 server-data", "chown -R 1000:1000 /server-data/*", "chown -R 1000:1000 server-files", "chown -R 1000:1000 /server-files/*"]
+          command: ["sh", "-c", "chown -R 1000:1000 server-data", "chown -R 1000:1000 /server-data/*"]
           volumeMounts:
             - mountPath: /server-data
               name: vol0
               subPath: ServerData
+        - name: volume-permissions2
+          image: busybox:1.31.1
+          command: ["sh", "-c", "chown -R 1000:1000 server-files", "chown -R 1000:1000 /server-files/*"]
+          volumeMounts:
             - mountPath: /server-files
               name: vol0
               subPath: ServerFiles
       containers:
-        - env:
+        - name: zomboid
+          env:
             - name: SERVER_NAME
               value: "Ry963"
-            - name: ADMIN_PASSWORD
+            - name: SERVER_PASSWORD
               value: "Pen15"
+            - name: SERVER_PUBLIC_NAME
+              value: "Ry963"
+            - name: SERVER_PUBLIC_DESC
+              value: "Hello"
+            - name: SERVER_PORT 
+              value: "16261"
+            - name: ADMIN_PASSWORD
+              value: "Pen155"
             - name: PUID
               value: "1000"
             - name: PGID
               value: "1000"
           image: afey/zomboid
           imagePullPolicy: Always
-          name: zomboid
           ports:
             - containerPort: 8766
               name: 8766udp
@@ -51,9 +63,9 @@ spec:
             - containerPort: 16261
               name: 16261udp
               protocol: UDP
-            - containerPort: 27015
-              name: 27015tcp
-              protocol: TCP
+#            - containerPort: 27015
+#              name: 27015tcp
+#              protocol: TCP
             - containerPort: 16262
               name: 16262tcp
               protocol: TCP
@@ -97,6 +109,5 @@ spec:
               subPath: ServerFiles
       volumes:
         - name: vol0
-          nfs:
-            path: /mnt/Alpha-Pool/K3s/Server_zomboid
-            server: 192.168.10.206
+          persistentVolumeClaim:
+            claimName: zomboid

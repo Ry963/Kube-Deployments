@@ -4,14 +4,14 @@ metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: zomboid
     metallb.universe.tf/address-pool: fixed
-  name: tcpzomboid
+  name: zomboidtcp
   namespace: default
 spec:
   ports:
-  - name: tcp27015
-    port: 27015
-    protocol: TCP
-    targetPort: 27015
+#  - name: tcp27015
+#    port: 27015
+#    protocol: TCP
+#    targetPort: 27015
   - name: tcp16262
     port: 16262
     protocol: TCP
@@ -67,7 +67,7 @@ metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: zomboid
     metallb.universe.tf/address-pool: fixed
-  name: udpzomboid
+  name: zomboidudp
   namespace: default
 spec:
   ports:
