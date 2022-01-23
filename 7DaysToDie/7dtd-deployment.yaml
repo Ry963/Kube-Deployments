@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: 7dtd-server
-  name: 7dtd-server
+    app: sdtd-server
+  name: sdtd-server
   namespace: default
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: 7dtd-server
+      app: sdtd-server
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: 7dtd-server
+        app: sdtd-server
     spec:
       containers:
         - env:
@@ -35,7 +35,7 @@ spec:
               value: "NO"
           image: vinanrra/7dtd-server
           imagePullPolicy: Always
-          name: 7dtd-server
+          name: sdtd-server
           ports:
             - containerPort: 26900
               name: 26900tcp
