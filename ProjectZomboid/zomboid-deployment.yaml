@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: zomboid
-  name: zomboid
+    app: pz-server
+  name: pz-server
   namespace: default
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: zomboid
+      app: pz-server
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: zomboid
+        app: pz-server
     spec:
       initContainers:
         - name: volume-permissions
@@ -33,7 +33,7 @@ spec:
               name: vol0
               subPath: ServerFiles
       containers:
-        - name: zomboid
+        - name: pz-server
           env:
             - name: SERVER_NAME
               value: "Ry963"
@@ -110,4 +110,4 @@ spec:
       volumes:
         - name: vol0
           persistentVolumeClaim:
-            claimName: zomboid
+            claimName: zomboid # to be changed

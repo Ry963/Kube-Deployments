@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: minecraft
-  name: minecraft
+    app: mc-server
+  name: mc-server
   namespace: default
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: minecraft
+      app: mc-server
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: minecraft
+        app: mc-server
     spec:
       containers:
         - env: 
@@ -23,7 +23,7 @@ spec:
               value: "TRUE"
           image: itzg/minecraft-server
           imagePullPolicy: Always
-          name: minecraft
+          name: mc-server
           ports:
             - containerPort: 25565
               name: 25565tcp
@@ -36,4 +36,4 @@ spec:
       volumes:
         - name: vol0
           persistentVolumeClaim:
-            claimName: minecraft
+            claimName: mc-server
