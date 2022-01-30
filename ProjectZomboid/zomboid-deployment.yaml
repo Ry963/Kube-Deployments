@@ -70,9 +70,6 @@ spec:
             - containerPort: 16261
               name: 16261udp
               protocol: UDP
-#            - containerPort: 27015
-#              name: 27015tcp
-#              protocol: TCP
             - containerPort: 16262
               name: 16262tcp
               protocol: TCP
@@ -107,6 +104,47 @@ spec:
               name: 16272tcp
               protocol: TCP
           resources: {}
+          volumeMounts:
+            - mountPath: /server-data
+              name: vol0
+              subPath: ServerData
+            - mountPath: /server-files
+              name: vol0
+              subPath: ServerFiles
+        - name: pz-servernfs
+          env:
+            - name: NFS_EXPORT_0
+              value: '/server-data *(rw,no_subtree_check)'
+          image: erichough/nfs-server
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 2049
+              name: 2049tcp
+              protocol: TCP
+            - containerPort: 111
+              name: 111tcp
+              protocol: TCP
+            - containerPort: 32765
+              name: 32765tcp
+              protocol: TCP
+            - containerPort: 32767
+              name: 32767tcp
+              protocol: TCP
+            - containerPort: 2049
+              name: 2049udp
+              protocol: UDP
+            - containerPort: 111
+              name: 111udp
+              protocol: UDP
+            - containerPort: 32765
+              name: 32765udp
+              protocol: UDP
+            - containerPort: 32767
+              name: 32767udp
+              protocol: UDP
+          resources: {}
+          securityContext:
+            privileged: true
           volumeMounts:
             - mountPath: /server-data
               name: vol0
