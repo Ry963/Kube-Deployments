@@ -18,17 +18,24 @@ spec:
         app: pz-server
     spec:
       initContainers:
-        - name: volume-permissions
+        - name: file-permisions
           image: busybox:1.31.1
-          command: ["sh", "-c", "chown -R 1000:1000 server-data", "chown -R 1000:1000 /server-data/*"]
+          command:
+            - "/bin/sh"
+            - "-c"
+          args:
+            - echo starting;
+              echo "Chown server-data start";
+              chown -R 1000:1000 server-data/ && echo "Chown server-data done";
+              echo "Chown server-files start";
+              chown -R 1000:1000 server-files/&& echo "Chown server-files done";
+              echo "Chmod server-data start";
+              chmod -R o+rwx server-data/ && echo "Chmod server-data done";
+              echo done;
           volumeMounts:
             - mountPath: /server-data
               name: vol0
               subPath: ServerData
-        - name: volume-permissions2
-          image: busybox:1.31.1
-          command: ["sh", "-c", "chown -R 1000:1000 server-files", "chown -R 1000:1000 /server-files/*"]
-          volumeMounts:
             - mountPath: /server-files
               name: vol0
               subPath: ServerFiles
@@ -99,7 +106,7 @@ spec:
             - containerPort: 16272
               name: 16272tcp
               protocol: TCP
-          resources:
+          resources: {}
           volumeMounts:
             - mountPath: /server-data
               name: vol0
