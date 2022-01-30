@@ -5,7 +5,7 @@ metadata:
     metallb.universe.tf/allow-shared-ip: pz-server
     metallb.universe.tf/address-pool: fixed
   name: pz-nfs-tcp
-  namespace: testing
+  namespace: default
 spec:
   ports:
   - name: tcp2049
@@ -36,7 +36,7 @@ metadata:
     metallb.universe.tf/allow-shared-ip: pz-server
     metallb.universe.tf/address-pool: fixed
   name: pz-nfs-udp
-  namespace: testing
+  namespace: default
 spec:
   ports:
   - name: udp2049
