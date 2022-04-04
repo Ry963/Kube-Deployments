@@ -28,7 +28,7 @@ spec:
               echo "Chown server-data start";
               chown -R 1000:1000 server-data/ && echo "Chown server-data done";
               echo "Chown server-files start";
-              chown -R 1000:1000 server-files/&& echo "Chown server-files done";
+              chown -R 1000:1000 server-files/ && echo "Chown server-files done";
               echo "Chmod server-data start";
               chmod -R o+rwx server-data/ && echo "Chmod server-data done";
               echo done;
